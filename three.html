@@ -1,0 +1,156 @@
+<html>
+	<head>		
+	</head>
+	<body>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/86/three.js"></script>
+		<script>	
+
+			// Create an example of a wall construction.
+		
+			// Create a light wood texture for the beams.
+			var texture = new THREE.TextureLoader().load( "textures/wood/wood_light.jpg" );
+			texture.wrapS = THREE.RepeatWrapping;
+			texture.wrapT = THREE.RepeatWrapping;
+			texture.repeat.set( 50, 50 );			
+		
+			// Create a smooth plaster texture for the plating.
+			var smoothPlasterTexture = new THREE.TextureLoader().load( "textures/plaster/plaster_smooth.jpg" );
+			texture.wrapS = THREE.RepeatWrapping;
+			texture.wrapT = THREE.RepeatWrapping;
+			texture.repeat.set( 50, 50 );	
+
+			// Create a screwhead texture for the screw heads.
+			var screwHeadTexture = new THREE.TextureLoader().load( "textures/screws/crosshead.jpg" );
+			texture.wrapS = THREE.RepeatWrapping;
+			texture.wrapT = THREE.RepeatWrapping;
+			texture.repeat.set( 50, 50 );					
+		
+			// Create the scene and the camera.
+			var scene = new THREE.Scene();
+			var camera = new THREE.PerspectiveCamera( 25, window.innerWidth / window.innerHeight, 0.15, 1000 );
+			
+			camera.position.z = 4;
+			
+			// Create the renderer and attach it to the body element.
+			var renderer = new THREE.WebGLRenderer();
+			renderer.setSize( window.innerWidth, window.innerHeight );
+			document.body.appendChild( renderer.domElement );
+			
+			// Create the material for the beams.
+			var beamMaterial = new THREE.MeshLambertMaterial( {  map: texture } );
+			
+			// Create the beams.
+			var firstbeamGeometry = new THREE.BoxGeometry( 1.5, 0.05 , 0.05 );
+			var firstbeam = new THREE.Mesh( firstbeamGeometry, beamMaterial);
+			
+			var secondbeamGeometry = new THREE.BoxGeometry( 1.5, 0.05 , 0.05 );
+			var secondbeam = new THREE.Mesh( secondbeamGeometry, beamMaterial);
+			
+			var thirdbeamGeometry = new THREE.BoxGeometry( 1.5, 0.05 , 0.05 );
+			var thirdbeam = new THREE.Mesh( thirdbeamGeometry, beamMaterial);
+			
+			var thirdbeamGeometry = new THREE.BoxGeometry( 1.5, 0.05 , 0.05 );
+			var thirdbeam = new THREE.Mesh( thirdbeamGeometry, beamMaterial);
+			
+			var forthbeamGeometry = new THREE.BoxGeometry( 1.5, 0.05 , 0.05 );
+			var forthbeam = new THREE.Mesh( thirdbeamGeometry, beamMaterial);
+			
+			var fifthbeamGeometry = new THREE.BoxGeometry( 1.5, 0.05 , 0.05 );
+			var fifthbeam = new THREE.Mesh( thirdbeamGeometry, beamMaterial);
+			
+			// Create the plaster plates.
+			var plateMaterial = new THREE.MeshLambertMaterial( { map: smoothPlasterTexture } );
+			
+			var firstPlateGeometry = new THREE.BoxGeometry(0.75, 0.01, 1.55);
+			var firstPlate = new THREE.Mesh(firstPlateGeometry, plateMaterial);
+			
+			var secondPlateGeometry = new THREE.BoxGeometry(0.75, 0.01, 1.55);
+			var secondPlate = new THREE.Mesh(secondPlateGeometry, plateMaterial);
+			
+			var thirdPlateGeometry = new THREE.BoxGeometry(0.75, 0.01, 1.55);
+			var thirdPlate = new THREE.Mesh(thirdPlateGeometry, plateMaterial);			
+				
+			var fourthPlateGeometry = new THREE.BoxGeometry(0.75, 0.01, 1.55);
+			var fourthPlate = new THREE.Mesh(fourthPlateGeometry, plateMaterial);	
+					
+			// Add all elements to the scene.	
+			scene.add( firstbeam );
+			scene.add( secondbeam );
+			scene.add( thirdbeam );
+			scene.add( forthbeam );
+			scene.add( fifthbeam );
+			scene.add( firstPlate );
+			scene.add( secondPlate );
+			scene.add( thirdPlate );
+			scene.add( fourthPlate );
+			
+			// Create the lightning.
+			const pointLight =
+			  new THREE.AmbientLight(0xFFFFFF);
+			
+			pointLight.position.x = 10;
+			pointLight.position.y = 32;
+			pointLight.position.z = 130;
+			
+			scene.add(pointLight);
+			
+			// Rotate all the shizzle until it looks nice :)
+			firstbeam.rotateZ( 90 * Math.PI / 180 );
+			secondbeam.rotateX( 90 * Math.PI / 180 );
+			thirdbeam.rotateX( 90 * Math.PI / 180 );
+			forthbeam.rotateZ (90 * Math.PI / 180);
+			fifthbeam.rotateZ (90 * Math.PI / 180);
+			
+			firstPlate.rotateX(90 * Math.PI / 180);
+			firstPlate.rotateY(90 * Math.PI / 180);
+			
+			secondPlate.rotateX(90 * Math.PI / 180);
+			secondPlate.rotateY(90 * Math.PI / 180);
+			
+			thirdPlate.rotateX(90 * Math.PI / 180);
+			thirdPlate.rotateY(90 * Math.PI / 180);
+			
+			fourthPlate.rotateX(90 * Math.PI / 180);
+			fourthPlate.rotateY(90 * Math.PI / 180);
+			
+			// Move the shizzle to make it even nicer :)
+			forthbeam.position.x = -0.75;
+			fifthbeam.position.x = 0.75;
+			
+			thirdbeam.position.y = 0.75;
+			secondbeam.position.y = -0.75;
+		
+			firstPlate.position.z = 0.03;
+			firstPlate.position.y = +0.75 /2;
+			
+			secondPlate.position.z = 0.03;
+			secondPlate.position.y = -0.75 /2 ;
+			
+			thirdPlate.position.z = -0.03;
+			thirdPlate.position.y = +0.75 /2;
+			
+			fourthPlate.position.z = -0.03;
+			fourthPlate.position.y = -0.75 /2 ;		
+
+			// Rotate the scene a little bit.
+			scene.rotateX(45 * Math.PI / 180);
+			scene.rotateY(45 * Math.PI / 180);
+			scene.rotateZ(45 * Math.PI / 180);
+			
+		
+			// This function animates the shizzle.
+			var animate = function() {
+			
+				firstPlate.material.needsUpdate = true;
+				requestAnimationFrame( animate );
+
+				scene.rotation.y += 0.001;
+				//camera.rotation.y += 0.01;
+				renderer.render( scene, camera );
+			}
+			
+			// Run the animation
+			animate();
+		</script>
+	</body>
+</html>
